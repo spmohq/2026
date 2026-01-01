@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Email Sequence Creator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 850px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    /* Input Section */
+    .input-section {
+      display: grid;
+      gap: 25px;
+      margin-bottom: 40px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 25px var(--shadow-color);
+      backdrop-filter: blur(12px);
+    }
+
+    .field-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 15px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.2);
+    }
+
+    /* Prompt Display Card */
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 32px var(--shadow-color);
+    }
+
+    .prompt-card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 10px;
+    }
+
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--accent-primary);
+      color: #111827;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .copy-button:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .copy-button.copied {
+      background-color: var(--accent-success);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      .input-section, .prompt-card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Email Sequence Creator</h1>
+      <p class="subtitle">Architect high-converting, trust-based email funnels</p>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <!-- Input Box 1 -->
+        <div class="field-wrapper">
+          <label for="lmInput">Lead Magnet File Name</label>
+          <input type="text" id="lmInput" placeholder="e.g. 10-Step-SEO-Guide.pdf">
+        </div>
+
+        <!-- Input Box 2 -->
+        <div class="field-wrapper">
+          <label for="slInput">Sales Letter File Name</label>
+          <input type="text" id="slInput" placeholder="e.g. Ultimate-SEO-Course-Sales-Page.docx">
+        </div>
+      </section>
+
+      <!-- Prompt Output -->
+      <div class="prompt-card">
+        <h2>Funnel Strategy Prompt</h2>
+        <pre id="finalPrompt" class="prompt-text"></pre>
+        <button class="copy-button" id="copyBtn">
+          <span id="copyBtnText">Copy Prompt</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <span id="year"></span> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const lmInput = document.getElementById('lmInput');
+    const slInput = document.getElementById('slInput');
+    const finalPrompt = document.getElementById('finalPrompt');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyBtnText = document.getElementById('copyBtnText');
+
+    function updatePrompt() {
+      const lmName = lmInput.value || "[Lead Magnet File Name]";
+      const slName = slInput.value || "[Sales Letter File Name]";
+
+      const template = `Context & Inputs
+Please carefully read and analyze the following materials before writing:
+- Lead Magnet: ${lmName}
+- Sales Letter: ${slName}
+
+Audience
+People who downloaded the lead magnet. They are problem-aware, interested, but not yet committed to purchasing.
+
+Objective
+Create a 5-email sequence that moves readers through the psychological arc:
+clarity → trust → commitment → purchase.
+
+Writing & Strategy Requirements
+- Include compelling subject lines for each email
+- Use a conversational, persuasive tone aligned with the sales letter
+- Avoid hype, exaggerated claims, or unrealistic promises
+- Use light storytelling where appropriate (personal, relatable, grounded)
+- Keep each email under 300 words
+- Each email must have one clear CTA only
+- Early emails should be value-driven and insight-focused
+- Later emails should be sales-focused without pressure
+- Link to the product sales page using [URL]
+
+Compliance & Quality Control (MANDATORY)
+After completing the 5-email sequence, provide a post-task checklist that explicitly confirms:
+- How each standard rule above was followed
+- That no commonly flagged email spam trigger words or phrases were used
+- That tone remained ethical, credible, and trust-based
+
+Primary Goal
+Generate clicks and conversions while preserving credibility, trust, and long-term list health.
+
+Post-Task Compliance Checklist (Self-Audit)
+
+- All 5 emails are under 300 words
+- Each email includes exactly one clear CTA
+- Subject lines are included and non-clickbait
+- No hype, exaggerated claims, or unrealistic promises were used
+- Light storytelling was used only where it supported clarity or trust
+- Tone matches the sales letter and audience awareness level
+- Early emails focus on value; later emails focus on purchase readiness
+- Sales page is linked using [URL] only
+- No commonly flagged spam-trigger words were used
+- Language avoids manipulation, pressure, or false urgency
+- Emails comply with ethical email marketing best practices`;
+
+      finalPrompt.textContent = template;
+    }
+
+    // Copy function
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(finalPrompt.textContent).then(() => {
+        const originalText = copyBtnText.textContent;
+        copyBtnText.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtnText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+
+    // Event Listeners
+    lmInput.addEventListener('input', updatePrompt);
+    slInput.addEventListener('input', updatePrompt);
+
+    // Initial load
+    document.getElementById('year').textContent = new Date().getFullYear();
+    updatePrompt();
+  </script>
+</body>
+</html>
