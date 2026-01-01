@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Premium Book PDF Template</title>
+
+  <!-- Recommended Google Font (download & self-host for production PDFs) -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- GLOBAL RESET ---------- */
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e0e0e0; /* screen only */
+      font-family: "Merriweather", "Georgia", serif;
+      counter-reset: page;
+    }
+
+    /* ---------- PAGE ---------- */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      margin: 20px auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      page-break-after: always;
+    }
+
+    /* ---------- SIDEBAR (DOUBLE WIDTH – PREMIUM) ---------- */
+    .sidebar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 38px;                 /* desktop & print */
+      background-color: #be2e36;
+    }
+
+    /* ---------- CONTENT ---------- */
+    .content {
+      margin-left: 84px;
+      padding: 42px 56px 80px 56px; /* bottom padding for footer */
+      flex-grow: 1;
+    }
+
+    /* ---------- TYPOGRAPHY ---------- */
+    h1 {
+      font-size: 18pt;
+      text-align: center;
+      text-decoration: underline;
+      margin-bottom: 32px;
+      font-weight: 800;
+    }
+
+    h2 {
+      font-size: 15pt;
+      text-align: center;
+      color: #c62828;
+      margin-bottom: 28px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 13.5pt;           /* optimal paid-PDF size */
+      line-height: 1.6;
+      margin-bottom: 18px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    /* ---------- IMAGES ---------- */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      margin-top: auto;
+      background-color: #fff5f6;
+      padding: 14px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-left {
+      display: flex;
+      gap: 6px;
+    }
+
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      font-weight: 900;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .box-dark { background-color: #a02025; }
+    .box-light { background-color: #ff7f85; }
+
+    .footer-center {
+      text-align: center;
+    }
+
+    .main-link {
+      color: #a02025;
+      font-size: 11pt;   /* intentionally smaller */
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .sub-link {
+      color: #ff7f85;
+      font-size: 9pt;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    /* ---------- PAGE NUMBER ---------- */
+    .page-number::after {
+      counter-increment: page;
+      content: counter(page);
+    }
+
+    .page-number {
+      font-size: 10pt;
+      color: #555;
+    }
+
+    /* ---------- MOBILE VIEW ---------- */
+    @media screen and (max-width: 900px) {
+      body { background: #ffffff; }
+
+      .page {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .sidebar { width: 36px; }
+
+      .content {
+        margin-left: 36px;
+        padding: 24px 18px 90px 18px;
+      }
+
+      h1 { font-size: 20px; }
+      h2 { font-size: 18px; }
+      p  { font-size: 15px; line-height: 1.65; }
+    }
+
+    /* ---------- PRINT ---------- */
+    @media print {
+      body { margin: 0; background: #fff; }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= PAGE 1 ================= -->
+  <div class="page">
+    <div class="sidebar"></div>
+
+    <div class="content">
+      <h1>Book Title</h1>
+      <h2>Chapter 1 – Introduction</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.</p>
+      <p>Vestibulum auctor dapibus neque. Nunc dignissim risus id metus.</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">
+        <div class="icon-box box-dark">S</div>
+        <div class="icon-box box-light">P</div>
+        <div class="icon-box box-dark">M</div>
+      </div>
+
+      <div class="footer-center">
+        <div class="main-link">Purchased at Gumroad.com</div>
+        <div class="sub-link">Copyright © Siva Prasad Mukherjee</div>
+      </div>
+
+      <div class="page-number"></div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 2 ================= -->
+  <div class="page">
+    <div class="sidebar"></div>
+
+    <div class="content">
+      <h2>Chapter 2 – Main Concepts</h2>
+
+            <!-- Image -->
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="iPad and Notebook">
+            </div>
+
+      <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue.</p>
+      <p>Eu vulputate magna eros eu erat. Aliquam erat volutpat.</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">
+        <div class="icon-box box-dark">S</div>
+        <div class="icon-box box-light">P</div>
+        <div class="icon-box box-dark">M</div>
+      </div>
+
+      <div class="footer-center">
+        <div class="main-link">PURCHASED AT GUMROAD.COM</div>
+        <div class="sub-link">Copyright © Siva Prasad Mukherjee</div>
+      </div>
+
+      <div class="page-number"></div>
+    </div>
+  </div>
+
+</body>
+</html>
